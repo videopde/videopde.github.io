@@ -570,6 +570,12 @@
                     <div class="media-row">
                         <div class="media-container">
                             <video controls loop autoplay muted>
+                                <source src="./static/videos/kf-100frames-0.97/masked.mp4" , type="video/mp4">
+                            </video>
+                            <div class="caption">Input</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
                                 <source src="./static/videos/kf-100frames-0.97/dpde.mp4" type="video/mp4">
                             </video>
                             <div class="caption">DiffusionPDE (Ext.)</div>
@@ -604,65 +610,92 @@
 
             <div class="columns is-centered">
                 <div class="column is-full-width">
-                    <h2 class="title is-4">Allen–Cahn Forward</h2>
+                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% observations 100 Frames</h2>
                     <div class="media-row">
                         <div class="media-container">
-                            <img src="./static/videos/ace-fwd/input.png" alt="First image">
-                            <div class="caption">Input (First Frame)</div>
-                        </div>
-                        <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/pino.mp4" type="video/mp4">
+                                <source src="./static/videos/kf_0.01/masked.mp4" type="video/mp4">
                             </video>
-                            <div class="caption">PINO</div>
+                            <div class="caption">Input</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/ours.mp4" type="video/mp4">
+                                <source src="./static/videos/kf_0.01/ours.mp4" type="video/mp4">
                             </video>
-                            <div class="caption">Ours</div>
+                            <div class="caption">Input</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/gt.mp4" type="video/mp4">
+                                <source src="./static/videos/kf_0.01/gt.mp4" type="video/mp4">
                             </video>
                             <div class="caption">GT</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <div class="container">
-                        <h3 class="title is-4">Allen–Cahn Inverse</h3>
-                        <div class="media-row">
-                            <div class="media-container">
-                                <img src="./static/videos/ace-inv/input.png" alt="First image">
-                                <div class="caption">Input (Last Frame)</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/pino.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">PINO</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/ours.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">Ours</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/gt.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">GT</div>
-                            </div>
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-4">Allen–Cahn Forward</h2>
+                <div class="media-row">
+                    <div class="media-container">
+                        <img src="./static/videos/ace-fwd/input.png" alt="First image">
+                        <div class="caption">Input (First Frame)</div>
+                    </div>
+                    <div class="media-container">
+                        <video controls loop autoplay muted>
+                            <source src="./static/videos/ace-fwd/pino.mp4" type="video/mp4">
+                        </video>
+                        <div class="caption">PINO</div>
+                    </div>
+                    <div class="media-container">
+                        <video controls loop autoplay muted>
+                            <source src="./static/videos/ace-fwd/ours.mp4" type="video/mp4">
+                        </video>
+                        <div class="caption">Ours</div>
+                    </div>
+                    <div class="media-container">
+                        <video controls loop autoplay muted>
+                            <source src="./static/videos/ace-fwd/gt.mp4" type="video/mp4">
+                        </video>
+                        <div class="caption">GT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <div class="container">
+                    <h3 class="title is-4">Allen–Cahn Inverse</h3>
+                    <div class="media-row">
+                        <div class="media-container">
+                            <img src="./static/videos/ace-inv/input.png" alt="First image">
+                            <div class="caption">Input (Last Frame)</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/ace-inv/pino.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">PINO</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/ace-inv/ours.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Ours</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/ace-inv/gt.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">GT</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
