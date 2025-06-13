@@ -713,7 +713,7 @@
 
             <div class="columns is-centered">
                 <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% observations 100 Frames</h2>
+                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% Observations 100 Frames</h2>
                     <div class="media-row">
                         <div class="media-container">
                             <video controls loop autoplay muted>
@@ -742,6 +742,40 @@
                     </div>
                 </div>
             </div>
+
+            <div class="columns is-centered">
+                <div class="column is-full-width">
+                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% Observations 20 Frames, 80 Frames Autoregress
+                    </h2>
+                    <div class="media-row">
+                        <div class="media-container">
+                            <video controls loop autoplay muted class="synced">
+                                <source src="./static/videos/kf-0.01-20-fwd-100/masked-20.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Input (20 Frames)</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted class="synced">
+                                <source src="./static/videos/kf-0.01-20-fwd-100/pino.mp4" , type="video/mp4">
+                            </video>
+                            <div class="caption">PINO</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted class="synced">
+                                <source src="./static/videos/kf-0.01-20-fwd-100/ours.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Ours</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted class="synced">
+                                <source src="./static/videos/kf-0.01-20-fwd-100/gt.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">GT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="columns is-centered">
                 <div class="column is-full-width">
@@ -842,11 +876,46 @@
             const delayOnLastFrame = 4000;
             const delayOnFirstFrame = 2000;
 
-            document.querySelectorAll('video').forEach(video => {
+            const allVideos = Array.from(document.querySelectorAll('video'));
+            const syncedVideos = allVideos.filter(v => v.classList.contains('synced'));
+            const unsyncedVideos = allVideos.filter(v => !v.classList.contains('synced'));
+
+            let readyCount = 0;
+            allVideos.forEach(video => {
                 video.controls = false;
                 video.loop = false;
                 video.playbackRate = 0.75;
 
+                video.addEventListener('canplaythrough', () => {
+                    readyCount++;
+                    if (readyCount === allVideos.length) {
+                        // sync‐start
+                        allVideos.forEach(v => v.currentTime = 0);
+                        allVideos.forEach(v => v.play());
+                    }
+                }, { once: true });
+            })
+
+            let endedCount = 0;
+            syncedVideos.forEach(video => {
+                video.addEventListener('ended', () => {
+                    endedCount++;
+                    if (endedCount === syncedVideos.length) {
+                        // everyone is now paused on last frame
+                        setTimeout(() => {
+                            // rewind together
+                            syncedVideos.forEach(v => v.currentTime = 0);
+                            setTimeout(() => {
+                                // play together & reset for next cycle
+                                syncedVideos.forEach(v => v.play());
+                                endedCount = 0;
+                            }, delayOnFirstFrame);
+                        }, delayOnLastFrame);
+                    }
+                });
+            });
+
+            unsyncedVideos.forEach(video => {
                 // Your custom "loop with delays" logic
                 video.addEventListener('ended', () => {
                     setTimeout(() => {
