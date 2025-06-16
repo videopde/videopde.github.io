@@ -23,7 +23,7 @@
             display: flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .media-container {
@@ -31,7 +31,7 @@
             flex-direction: column;
             align-items: center;
             width: 16%;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         video,
@@ -42,7 +42,7 @@
         }
 
         .caption {
-            margin-top: 10px;
+            margin-top: 0px;
             font-size: 0.9em;
             text-align: center;
         }
@@ -73,8 +73,77 @@
         .publication-authors a:hover {
             text-decoration: underline;
         }
-    </style>
+    
+        section:nth-of-type(even) {
+            background-color: #f8f8f8;
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #ffffff;
+        }
+
+        #more-results {
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        #more-results button {
+            padding: 0.75em 2em;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            background-color: #2e2e2e;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-family: 'Google Sans', sans-serif;
+            transition: background-color 0.2s;
+        }
+
+        #more-results button:hover {
+            background-color: #1f1f1f;
+        }
+
+        .extra-results {
+            display: none;
+        }
+
+        /* Tight spacing utility classes */
+        .tight-section {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .no-padding {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        section.section {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+
+        .section h2,
+        .section p,
+        .section .content {
+            margin-top: 0 !important;
+            margin-bottom: 1rem !important;
+        }
+
+
+</style>
 </head>
+
+<script>
+  function toggleAbstract() {
+    const abs = document.getElementById('abstract');
+    abs.style.display = abs.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
 <!-- d -->
 <body>
     <section class="hero">
@@ -147,25 +216,85 @@
                     <!-- <h2 class="title is-3">TL;DR</h2> -->
                     <div class="content has-text-justified">
                         <p>
-                            <strong>TL;DR:</strong> We present a unified framework for solving forward/inverse/partial
-                            PDEs using a video inpainting diffusion model.
+                            <strong>TL;DR:</strong> We present a unified framework for predicting forward/inverse/partial
+                            PDE soltuions using a video inpainting diffusion model.
                         </p>
                     </div>
                 </div>
             </div>
-
-            <!-- <p>
-                <strong>TL;DR:</strong> We present a unified framework for solving forward/inverse/partial PDEs using a video inpainting diffusion models.
-            </p> -->
-
+            <div class="columns is-centered extra-results">
+                <div class="column is-full-width">
+                    <div class="media-row">
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.01/masked.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Input Video (1% pixels)</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.01/pino.mp4" , type="video/mp4">
+                            </video>
+                            <div class="caption">PINO</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.01/ours.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Ours</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.01/gt.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">GT</div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
-                    <h2 class="title is-3">Abstract</h2>
+                    <!-- <h2 class="title is-3">TL;DR</h2> -->
                     <div class="content has-text-justified">
                         <p>
+                            <strong> Flexible PDE solution predictions. </strong>From sparse spatiotemporal observations (left), our method can predict future/past and reconstruct the full field solutions much more flexibly and accurately compared to existing state-of-the-art methods, e.g., PINO (Li et. al.).
+                        </p>
+                    </div>
+                </div>
+            </div>
+   
+        </div>
+    </section>
+
+    <section class="section tight-section">
+    <div class="container is-max-desktop no-padding">
+    <div class="hero-body no-padding">
+      <img src="./static/images/teaser.png" style="margin-bottom: 0.5rem;">
+                <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                    <p style="margin: 0;">
+                        <strong>VideoPDE pipeline.</strong>
+                        We cast PDE solving as a video inpainting task. Our Hierarchical Video Diffusion Transformer
+                        (HV-DiT) denoises initial noise into a full video, conditioned on pixel-level sparse
+                        measurements. Its ability to handle arbitrary input patterns enables flexible application to
+                        diverse PDE scenarios, including forward, inverse, and continuous measurement tasks.
+                    </p>
+                </div>
+
+      
+      <!-- Toggle Button -->
+      <div style="text-align: center; margin-top: 0.5rem;">
+        <button class="button is-small is-dark is-rounded" onclick="toggleAbstract()">
+          View Abstract
+        </button>
+      </div>
+
+      <!-- Collapsible Abstract -->
+    <div style="margin-top: 1.25rem;">
+      <div id="abstract" class="content has-text-justified" style="display: none;">
+        <p style="margin: 0;">
                             We present a unified framework for solving partial differential equations (PDEs) using
                             video-inpainting diffusion transformer models. Unlike existing methods that devise
-                            specialized strategies for either forward or inverse problems under partial observation, our
+                            specialized strategies for either forward or inverse problems under full or partial observation, our
                             approach unifies these tasks under a single, flexible generative framework. Specifically, we
                             recast PDE-solving as a generalized inpainting problem, e.g., treating forward prediction as
                             inferring missing spatiotemporal information of future states from initial conditions. To
@@ -175,15 +304,19 @@
                             enhancing computational efficiency through hierarchical modeling. Extensive experiments show
                             that our video inpainting-based diffusion model offers an accurate and versatile solution
                             across a wide range of PDEs and problem setups, outperforming state-of-the-art baselines.
-                        </p>
-                    </div>
+        </p>
+                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="hero-body">
-                <img src="./static/images/teaser.png">
-                <div class="content has-text-justified">
-                    <p>
+<!--     <section class="section tight-section">
+        <div class="container is-max-desktop no-padding">
+            <div class="hero-body no-padding">
+                <img src="./static/images/teaser.png" style="margin-bottom: 0.5rem;">
+                <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                    <p style="margin: 0;">
                         <strong>VideoPDE pipeline.</strong>
                         We cast PDE solving as a video inpainting task. Our Hierarchical Video Diffusion Transformer
                         (HV-DiT) denoises initial noise into a full video, conditioned on pixel-level sparse
@@ -192,11 +325,15 @@
                     </p>
                 </div>
             </div>
-
-            <div class="hero-body">
-                <img src="./static/images/table-1.png">
-                <div class="content has-text-justified">
-                    <p>
+        </div>
+    </section>
+ -->
+    <section class="section tight-section">
+        <div class="container is-max-desktop no-padding">
+            <div class="hero-body no-padding">
+                <img src="./static/images/table-1.png" style="margin-bottom: 0.5rem;">
+                <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                    <p style="margin: 0;">
                         <strong>Conceptual comparison of PDE-solving methods.</strong>
                         Neural operator methods struggle with partial inputs. Only PINN and VideoPDE handle forward,
                         inverse, and continuous measurements flexibly. Generative baselines focus on reconstructing one
@@ -205,103 +342,49 @@
                     </p>
                 </div>
             </div>
-
-            <div class="hero-body">
-                <div class="content has-text-justified">
-                    <img src="./static/images/error_map_grid.png">
-                    <p>
-                        <strong>Continuous measurement reconstruction comparison.</strong>
-                        We compare relative error maps for reconstructing dense spatiotemporal fields from fixed sensors
-                        providing 1% continuous observations on Navier–Stokes. Our results are the most accurate with
-                        minimal error. In contrast, baseline methods are significantly slower and not suitable for
-                        forward prediction (Zhuang & Shu)
-                    </p>
-                </div>
-            </div>
+        </div>
     </section>
 
     <section class="section">
         <div class="container is-max-desktop">
-            <h2 class="title is-3">Sample Videos</h2>
             <div class="columns is-centered">
                 <div class="column is-full-width">
-                    <h2 class="title is-4">Wave-Layer Continuous 1% observations</h2>
+                    <h2 class="title is-4">Kolmogorov Flow Forward Prediction</h2>
+                        <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                        Using our video inpainting framework, we can predict the future frames from the first frame initial condition. For the complex Kolmogorov Flow, VideoPDE performs noticeably better than prior ML-based methods.
+                        </div>
                     <div class="media-row">
                         <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/masked.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Input</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/dpde.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DiffusionPDE (Ext.)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/shu.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Shu et al.</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/zhuang.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Zhuang et al.</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl-0.99/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Wave-Layer Forward</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/wave-layer-forward/input.png" alt="First image">
+                            <img src="./static/videos/100frames/input.png" alt="First image">
                             <div class="caption">Input (First Frame)</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/wave-layer-forward/deeponet.mp4" type="video/mp4">
+                                <source src="./static/videos/100frames/deeponet.mp4" type="video/mp4">
                             </video>
                             <div class="caption">DeepONet</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/wave-layer-forward/fno.mp4" type="video/mp4">
+                                <source src="./static/videos/100frames/fno.mp4" type="video/mp4">
                             </video>
                             <div class="caption">FNO</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/wave-layer-forward/pino.mp4" type="video/mp4">
+                                <source src="./static/videos/100frames/pino.mp4" type="video/mp4">
                             </video>
                             <div class="caption">PINO</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/wave-layer-forward/ours.mp4" type="video/mp4">
+                                <source src="./static/videos/100frames/ours.mp4" type="video/mp4">
                             </video>
                             <div class="caption">Ours</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
-                                <source src="./static/videos/wave-layer-forward/gt.mp4" type="video/mp4">
+                                <source src="./static/videos/100frames/gt.mp4" type="video/mp4">
                             </video>
                             <div class="caption">GT</div>
                         </div>
@@ -311,7 +394,44 @@
 
             <div class="columns is-centered">
                 <div class="column is-full-width">
-                    <h2 class="title is-4">Wave-Layer Inverse</h2>
+                    <h2 class="title is-4">Kolmogorov Flow Forward Prediction from 3% Observation</h2>
+                        <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                        Thanks to our flexible video inpainting framework, VideoPDE can predict the full field future frames from a partial pixels of the initial condition frame, 3% shown here. The SOTA in the forward modeling, PINO, is given the interpolated first frame, which performs significantly worse than our generative approach.
+                        </div>
+                    <div class="media-row">
+                        <div class="media-container">
+                            <img src="./static/videos/kf_0.03_fwd_100frame/input.png" alt="First image">
+                            </video>
+                            <div class="caption">Input (First Frame)</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.03_fwd_100frame/pino.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">PINO </div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.03_fwd_100frame/ours.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">Ours</div>
+                        </div>
+                        <div class="media-container">
+                            <video controls loop autoplay muted>
+                                <source src="./static/videos/kf_0.03_fwd_100frame/gt.mp4" type="video/mp4">
+                            </video>
+                            <div class="caption">GT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column is-full-width">
+                    <h2 class="title is-4">Wave-Equation Inverse Modeling</h2>
+                        <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                            Similarly, our unified framework allows for inverse prediction, where we predict the past from the future observations. Here, from the last frame, we accurately predict the previous frames.
+                        </div>
                     <div class="media-row">
                         <div class="media-container">
                             <img src="./static/videos/wave-layer-inverse/input.png" alt="First image">
@@ -353,44 +473,17 @@
 
             <div class="columns is-centered">
                 <div class="column is-full-width">
-                    <h2 class="title is-4">Wave-Layer Inverse 3% observation</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/wl_inv_0.97/input.png" alt="First image">
-                            <div class="caption">Input (Last Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl_inv_0.97/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO (Interpolated)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl_inv_0.97/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/wl_inv_0.97/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
                     <h2 class="title is-4">Navier–Stokes Continuous 1% observations</h2>
+                        <div class="content has-text-justified" style="margin-top: 0.5rem;">
+                            In this Navier-Stokes experiments, similar to the teaser videos, 1% of the pixels provide continuous sensor readings, from which VideoPDE almost perfectly reconstructs the full field solution, noticeably better than SOTA methods for this task.
+                        </div>
+
                     <div class="media-row">
                         <div class="media-container">
                             <video controls loop autoplay muted>
                                 <source src="./static/videos/ns-0.99/masked.mp4" type="video/mp4">
                             </video>
-                            <div class="caption">Input</div>
+                            <div class="caption">Input Video (1% pixels)</div>
                         </div>
                         <div class="media-container">
                             <video controls loop autoplay muted>
@@ -426,420 +519,14 @@
                 </div>
             </div>
 
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Navier–Stokes Forward</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/ns-fwd/input.png" alt="First image">
-                            <div class="caption">Input (First Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-fwd/deeponet.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DeepONet</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-fwd/fno.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">FNO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-fwd/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-fwd/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-fwd/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Navier–Stokes Inverse</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/ns-inv/input.png" alt="First image">
-                            <div class="caption">Input (Last Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-inv/deeponet.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DeepONet</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-inv/fno.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">FNO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-inv/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-inv/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ns-inv/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Forward</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/kf-fwd/input.png" alt="First image">
-                            <div class="caption">Input (First Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-fwd/deeponet.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DeepONet</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-fwd/fno.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">FNO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-fwd/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-fwd/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-fwd/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Inverse</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/kf-inv/input.png" alt="First image">
-                            <div class="caption">Input (Last Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-inv/deeponet.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DeepONet</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-inv/fno.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">FNO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-inv/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-inv/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-inv/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Autoregress 100 Frames</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/100frames/input.png" alt="First image">
-                            <div class="caption">Input (Last Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/100frames/deeponet.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DeepONet</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/100frames/fno.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">FNO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/100frames/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/100frames/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/100frames/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Autoregress 3% Observation 100 Frames</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/kf_0.03_fwd_100frame/input.png" alt="First image">
-                            </video>
-                            <div class="caption">Input (First Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.03_fwd_100frame/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO (Interpolated)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.03_fwd_100frame/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.03_fwd_100frame/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Continuous 3% observations 100 Frames</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/masked.mp4" , type="video/mp4">
-                            </video>
-                            <div class="caption">Input</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/dpde.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">DiffusionPDE (Ext.)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/shu.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Shu et al.</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/zhuang.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Zhuang et al.</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf-100frames-0.97/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% Observations 100 Frames</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.01/masked.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Input</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.01/pino.mp4" , type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.01/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/kf_0.01/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Kolmogorov Flow Continuous 1% Observations 20 Frames, 80 Frames Autoregress
-                    </h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <video controls loop autoplay muted class="synced">
-                                <source src="./static/videos/kf-0.01-20-fwd-100/masked-20.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Input (20 Frames)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted class="synced">
-                                <source src="./static/videos/kf-0.01-20-fwd-100/pino.mp4" , type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted class="synced">
-                                <source src="./static/videos/kf-0.01-20-fwd-100/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted class="synced">
-                                <source src="./static/videos/kf-0.01-20-fwd-100/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-4">Allen–Cahn Forward</h2>
-                    <div class="media-row">
-                        <div class="media-container">
-                            <img src="./static/videos/ace-fwd/input.png" alt="First image">
-                            <div class="caption">Input (First Frame)</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/pino.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">PINO</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/ours.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">Ours</div>
-                        </div>
-                        <div class="media-container">
-                            <video controls loop autoplay muted>
-                                <source src="./static/videos/ace-fwd/gt.mp4" type="video/mp4">
-                            </video>
-                            <div class="caption">GT</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <div class="container">
-                        <h3 class="title is-4">Allen–Cahn Inverse</h3>
-                        <div class="media-row">
-                            <div class="media-container">
-                                <img src="./static/videos/ace-inv/input.png" alt="First image">
-                                <div class="caption">Input (Last Frame)</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/pino.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">PINO</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/ours.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">Ours</div>
-                            </div>
-                            <div class="media-container">
-                                <video controls loop autoplay muted>
-                                    <source src="./static/videos/ace-inv/gt.mp4" type="video/mp4">
-                                </video>
-                                <div class="caption">GT</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="more-results">
+          <a href="more_results.html" class="external-link button is-rounded is-dark">
+            More Results
+          </a>
         </div>
-    </section>
+
+</section>
 
 
 
@@ -876,46 +563,11 @@
             const delayOnLastFrame = 4000;
             const delayOnFirstFrame = 2000;
 
-            const allVideos = Array.from(document.querySelectorAll('video'));
-            const syncedVideos = allVideos.filter(v => v.classList.contains('synced'));
-            const unsyncedVideos = allVideos.filter(v => !v.classList.contains('synced'));
-
-            let readyCount = 0;
-            allVideos.forEach(video => {
+            document.querySelectorAll('video').forEach(video => {
                 video.controls = false;
                 video.loop = false;
                 video.playbackRate = 0.75;
 
-                video.addEventListener('canplaythrough', () => {
-                    readyCount++;
-                    if (readyCount === allVideos.length) {
-                        // sync‐start
-                        allVideos.forEach(v => v.currentTime = 0);
-                        allVideos.forEach(v => v.play());
-                    }
-                }, { once: true });
-            })
-
-            let endedCount = 0;
-            syncedVideos.forEach(video => {
-                video.addEventListener('ended', () => {
-                    endedCount++;
-                    if (endedCount === syncedVideos.length) {
-                        // everyone is now paused on last frame
-                        setTimeout(() => {
-                            // rewind together
-                            syncedVideos.forEach(v => v.currentTime = 0);
-                            setTimeout(() => {
-                                // play together & reset for next cycle
-                                syncedVideos.forEach(v => v.play());
-                                endedCount = 0;
-                            }, delayOnFirstFrame);
-                        }, delayOnLastFrame);
-                    }
-                });
-            });
-
-            unsyncedVideos.forEach(video => {
                 // Your custom "loop with delays" logic
                 video.addEventListener('ended', () => {
                     setTimeout(() => {
